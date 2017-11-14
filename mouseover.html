@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+#myTest{
+    /*max-height: 0;*/
+    overflow: hidden;
+    color: #fff;
+    max-height: 0px;
+    width: 50%;
+    text-align: center;
+    margin: 0px auto;
+    height: 80px;
+}
+#clickMe{
+    margin: 0 auto;
+    text-align: center;
+    color: #fff;
+    background-color: #000;
+    width: 7%;
+    border-radius: 0px 0px 7px 7px;
+}
+
+#right-text{
+    /*max-width: 0;*/
+    overflow: hidden;
+    color: #fff;
+    background-color:#000;
+    height: 0;
+    padding-top: 31px;
+    max-width: 273px;
+    height: 132px;
+    position: relative;
+    left: -251px;
+}
+
+#clickMe-side{
+    position: absolute;
+    text-align: center;
+    color: #fff;
+    background-color: #000;
+    width: 29%;
+    border-radius: 0px 0px 7px 7px;
+    transform: rotate(270deg);
+    margin-top: 18px;
+    padding-bottom: 10px;
+}
+h2{
+    text-align: center;
+}
+#side-wrapper{
+    height: 123px;
+    overflow: hidden;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>Hover Accordion in pure javascript</h2>
+    <div class="row">
+        <div id="myTest">
+            hello
+        </div>
+        <div id="clickMe" onmouseover="myClick()">
+            Hover Over
+        </div>
+    </div>
+    <div class="row">
+        <div id="side-wrapper">
+            <div id="right-text">
+                This is for ad or anything on the right
+                <span id="clickMe-side" onmouseover="myMouseOver()">
+                </span>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<script>
+window.onload = init;
+function init(){
+    console.log("I am in init");
+    document.getElementById("clickMe-side").innerHTML = "Open";
+}
+
+function myClick(){
+    var test = document.getElementById("myTest");
+    var myHeight = window.getComputedStyle(test,null).getPropertyValue("max-height");
+    console.log(myHeight);
+    if(myHeight=="0px"){
+        // test.style.maxHeight = "300px";
+        test.style.backgroundColor = "black";
+        test.style.transition ="max-height 0.7s ease-out";
+        // test.style.maxHeight = test.scrollHeight+"px";
+        test.style.maxHeight = "80px";
+        console.log(test.style.maxHeight);
+        
+    }
+    else{
+         test.style.maxHeight="0px";
+    }
+}
+
+function myMouseOver(){
+    var rightText = document.getElementById("right-text");
+    var leftIndicator = window.getComputedStyle(rightText,null).getPropertyValue("left");
+    console.log(leftIndicator);
+    if(leftIndicator=="-251px"){
+        console.log("I am in");
+        document.getElementById("clickMe-side").innerHTML = "Close";
+        rightText.style.transition = "left 0.7s ease-out";
+        rightText.style.left = "0px";
+        
+    }
+    else{
+        rightText.style.left = "-251px";
+        document.getElementById("clickMe-side").innerHTML = "Open";
+    }
+}
+
+</script>
+
+</body>
+</html>
